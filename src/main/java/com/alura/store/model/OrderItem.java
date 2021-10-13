@@ -32,6 +32,7 @@ public class OrderItem {
     this.quantity = quantity;
     this.order = order;
     this.product = product;
+    this.unitPrice = product.getPrice();
   }
 
   public long getId() {

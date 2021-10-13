@@ -2,6 +2,7 @@ package com.alura.store.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -25,14 +26,19 @@ public class Order {
   @ManyToOne
   private Client client;
   
-  @OneToMany
-  private List<OrderItem> items;
+  @OneToMany(mappedBy = "order")
+  private List<OrderItem> items = new ArrayList<>();
   
   public Order() {
   }
  
   public Order(Client client) {
     this.client = client;
+  }
+  
+  public void addAItemToOrder(OrderItem orderItem) {
+    orderItem.setOrder(this);
+    this.items.add(orderItem);
   }
 
   public long getId() {
