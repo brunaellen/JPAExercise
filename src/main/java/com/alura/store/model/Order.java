@@ -2,12 +2,14 @@ package com.alura.store.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +24,9 @@ public class Order {
   
   @ManyToOne
   private Client client;
+  
+  @OneToMany
+  private List<OrderItem> items;
   
   public Order() {
   }
