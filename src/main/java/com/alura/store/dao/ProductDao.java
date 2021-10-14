@@ -6,13 +6,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import com.alura.store.model.Product;
 
-public class ProductDao {
+public class ProductDao implements RegisterDAO<Product>{
   private EntityManager entityManager;
   
   public ProductDao(EntityManager entityManager) {
     this.entityManager = entityManager;
   }
   
+  @Override
   public void register(Product product) {
     this.entityManager.persist(product);
   }
@@ -26,11 +27,11 @@ public class ProductDao {
     return entityManager.createQuery(jpql, Product.class).getResultList();
   }
   
-  public List<Product> searchProductByName(String name) {
+  public Product searchProductByName(String name) {
     String jpql = "SELECT p FROM Product p WHERE p.name = :name";
     return entityManager.createQuery(jpql, Product.class)
         .setParameter("name", name)
-        .getResultList();
+        .getSingleResult();
   }
   
   public List<Product> searchProductByCategoryName(String name) {

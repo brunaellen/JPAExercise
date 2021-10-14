@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements StoreModel {
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,5 +70,11 @@ public class Product {
   }
   public void setPrice(BigDecimal price) {
     this.price = price;
+  }
+  
+  @Override
+  public String toString() {
+    return String.format("%nProduct: %s,%nDescription: %s,%nPrice: %.2f,%nCategory: %s", 
+        this.name, this.descripton, this.price, this.category);
   }
 }

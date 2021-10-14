@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "clients")
-public class Client {
+public class Client implements StoreModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

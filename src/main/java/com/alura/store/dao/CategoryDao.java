@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 import com.alura.store.model.Category;
 
-public class CategoryDao {
+public class CategoryDao implements RegisterDAO<Category> {
   private EntityManager entityManager;
   
   public CategoryDao(EntityManager entityManager) {
