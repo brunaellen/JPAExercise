@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 
 import com.alura.store.model.Order;
 import com.alura.store.model.Product;
+import com.alura.store.vo.SalesReportVo;
 
 public class OrderDao implements RegisterDAO<Order> {
   private EntityManager entityManager;
@@ -29,16 +30,17 @@ public class OrderDao implements RegisterDAO<Order> {
         .getSingleResult();
   }
   
-  public List<Object[]> salesReport() {
-    String jpql = "SELECT product.name, "
+  public List<SalesReportVo> salesReport() {
+    String jpql = "SELECT new com.alura.store.vo.SalesReportVo( "
+        + "product.name, "
         + "SUM(orderItem.quantity) as totalQuantity, "
-        + "MAX(o.date) "
+        + "MAX(o.date)) "
         + "FROM Order o "
         + "JOIN o.items orderItem "
         + "JOIN orderItem.product product "
         + "GROUP BY product.name "
         + "ORDER BY totalQuantity DESC ";
-    return entityManager.createQuery(jpql, Object[].class)
+    return entityManager.createQuery(jpql, SalesReportVo.class)
         .getResultList();
   }
 }
