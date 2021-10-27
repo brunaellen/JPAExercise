@@ -23,7 +23,7 @@ public class Order implements StoreModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  private BigDecimal totalValue;
+  private BigDecimal totalValue = BigDecimal.ZERO;
   private LocalDate date = LocalDate.now();
   
   @ManyToOne
@@ -42,6 +42,7 @@ public class Order implements StoreModel {
   public void addAItemToOrder(OrderItem orderItem) {
     orderItem.setOrder(this);
     this.items.add(orderItem);
+    this.totalValue = this.totalValue.add(orderItem.getValue());
   }
   
   public List<OrderItem> getItems() {
@@ -108,7 +109,7 @@ public class Order implements StoreModel {
 
     
     return String.format("%nOrder specification:%nId: %d%n"
-        + "Client: %s\nProducts: %s%n",this.id, this.client.getName(), 
+        + "Client: %s\nProducts: %s",this.id, this.client.getName(), 
         Arrays.toString(allItemNames.toArray()));
   }
 }

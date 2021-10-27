@@ -1,6 +1,7 @@
 package com.alura.store.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -42,8 +43,17 @@ public class OrderRegistration {
       Order order = new Order(client);
       order.addAItemToOrder(new OrderItem(10, order, product));
       registerInTransaction(orderDao, order);
+      
       displayRegisteredOrder(order.getId());
-    } finally {
+      displayTotalValueSold();
+      List<Object[]> salesReport = orderDao.salesReport();
+      for (Object[] obj: salesReport) {
+        System.out.println(obj[0]);
+        System.out.println(obj[1]);
+        System.out.println(obj[2]);
+      }
+      
+      } finally {
       closeEntityManager();
     }
   }
@@ -71,6 +81,11 @@ public class OrderRegistration {
   
   private void displayRegisteredOrder(long id) {
     Order order = orderDao.searchAOrderById(id);
-    System.out.println("\nOder successfully registered!!!\n" + order);
+    System.out.println("\nOder successfully registered!!!" + order);
+  }
+  
+  public void displayTotalValueSold() {
+    BigDecimal totalValueSold = orderDao.totalValueSold();
+    System.out.println("Total value of the order is: " + totalValueSold);
   }
 }
