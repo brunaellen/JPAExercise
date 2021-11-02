@@ -3,6 +3,7 @@ package com.alura.store.dao;
 import javax.persistence.EntityManager;
 
 import com.alura.store.model.Category;
+import com.alura.store.model.Client;
 
 public class CategoryDao implements RegisterDAO<Category> {
   private EntityManager entityManager;

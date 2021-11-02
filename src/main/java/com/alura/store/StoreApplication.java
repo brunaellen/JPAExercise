@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import com.alura.store.dao.CategoryDao;
 import com.alura.store.dao.OrderDao;
 import com.alura.store.dao.ProductDao;
 import com.alura.store.model.Order;
@@ -34,5 +35,6 @@ public class StoreApplication {
     List<Product> products = productDao.searchProductByGivenParameters("Apple MacBook Air", new BigDecimal(800.00), null);
     
     products.forEach(product -> System.out.print(product.getName()));
+    
   }
 }

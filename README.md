@@ -15,4 +15,4 @@
 ## About The Project
 The main focus of this application is to practice the persistence of data to a database using JPA specification and hibernate implementation.
 
-The application register products and their categories and also clients and theirs orders within a database(Mysql) and also retrieve information from the database of the registered products/clients/orders and products categories.
+The application register products and their categories, clients and theirs orders within a database(Mysql) and also retrieve information from the database of the registered products/clients/orders and products categories.
