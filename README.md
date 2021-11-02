@@ -1,4 +1,4 @@
-# Project developed during the (Persistence with JPA: Introduction to Hibernate Course)
+# Project developed during the (Persistence with JPA Course)
 
 ## I developed this project to learn and put in practice the JPA concept using hibernate as implementation.
 
