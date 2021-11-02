@@ -1,9 +1,15 @@
 package com.alura.store.dao;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import com.alura.store.model.Product;
 
 public class ProductDao implements RegisterDAO<Product>{
@@ -46,5 +52,28 @@ public class ProductDao implements RegisterDAO<Product>{
     return entityManager.createQuery(jpql, BigDecimal.class)
         .setParameter("name", name)
         .getSingleResult();
+  }
+  
+  public List<Product> searchProductByGivenParameter(String name, 
+      BigDecimal price, LocalDate dateRegistration) {
+    
+    CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+    CriteriaQuery<Product> query = builder.createQuery(Product.class);
+    Root<Product> from = query.from(Product.class);
+    Predicate filters = builder.and();
+    
+    if(name != null && !name.trim().isEmpty()) {
+      filters = builder.and(filters, builder.equal(from.get("name"), name));
+    }
+    if(price != null) {
+      filters = builder.and(filters, builder.equal(from.get("price"), price));
+    }
+    if(dateRegistration != null) {
+      filters = builder.and(filters, builder.equal(from.get("dateRegistration"), dateRegistration));
+    }
+    
+    query.where(filters);
+    
+    return entityManager.createQuery(query).getResultList();
   }
 }
