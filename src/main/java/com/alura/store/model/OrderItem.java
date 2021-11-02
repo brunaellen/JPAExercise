@@ -3,6 +3,7 @@ package com.alura.store.model;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,10 +20,10 @@ public class OrderItem {
   private BigDecimal unitPrice;
   private int quantity;
   
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Order order;
   
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Product product;
   
   public OrderItem() {

@@ -50,6 +50,7 @@ public class OrderRegistration {
       
       displayRegisteredOrder(order.getId());
       displayTotalValueSold();
+      
       List<SalesReportVo> salesReport = orderDao.salesReport();
       salesReport.forEach(System.out::println);
     }finally {

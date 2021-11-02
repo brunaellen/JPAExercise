@@ -43,4 +43,11 @@ public class OrderDao implements RegisterDAO<Order> {
     return entityManager.createQuery(jpql, SalesReportVo.class)
         .getResultList();
   }
+  
+  public Order seachOrderByClient(Long id) {
+    String jpql = "SELECT o FROM Order o JOIN FETCH o.client WHERE o.id = :id";
+    return entityManager.createQuery(jpql, Order.class)
+        .setParameter("id", id)
+        .getSingleResult();
+  }
 }
