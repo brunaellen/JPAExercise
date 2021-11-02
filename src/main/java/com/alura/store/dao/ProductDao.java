@@ -54,7 +54,7 @@ public class ProductDao implements RegisterDAO<Product>{
         .getSingleResult();
   }
   
-  public List<Product> searchProductByGivenParameter(String name, 
+  public List<Product> searchProductByGivenParameters(String name, 
       BigDecimal price, LocalDate dateRegistration) {
     
     CriteriaBuilder builder = entityManager.getCriteriaBuilder();

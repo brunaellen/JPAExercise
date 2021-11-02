@@ -31,7 +31,7 @@ public class StoreApplication {
     //testing a query using Criteria API
     EntityManager secondEntityManager = JPAUtil.getEntityManager();
     ProductDao productDao = new ProductDao(secondEntityManager);
-    List<Product> products = productDao.searchProductByGivenParameter("Apple MacBook Air", new BigDecimal(800.00), null);
+    List<Product> products = productDao.searchProductByGivenParameters("Apple MacBook Air", new BigDecimal(800.00), null);
     
     products.forEach(product -> System.out.print(product.getName()));
   }
